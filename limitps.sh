@@ -6,8 +6,10 @@ status="$?"
 
 if [ $status -eq 0 ]
   then
-    cpulimit --pid=$proceso -l 50
-    echo "Limitando $NombreProceso."
+    echo -n "Límite CPU? >"
+    read LimiteCPU
+    echo "Limitando $NombreProceso a $LimiteCPU % de tiempo de CPU."
+    cpulimit --pid=$proceso -l $LimiteCPU > /dev/null
   else
     echo "No se han encontrado instancias del proceso $NombreProceso."
 fi
